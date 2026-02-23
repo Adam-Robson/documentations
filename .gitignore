@@ -1,0 +1,35 @@
+# Dependencies
+node_modules
+
+# build
+/dist
+/tmp
+/out
+
+# Testing and debugging
+/lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+
+# Optional npm cache files
+.npm
+
+# Environment variables
+# Protect sensitive data like API keys and passwords
+.env
+
+# Project build files
+pids
+logs
+results
+build
+
+# OS and Editor files (optional but recommended)
+.DS_Store
+Thumbs.db
+.vscode
