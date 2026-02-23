@@ -66,7 +66,7 @@ describe('search command', () => {
             rowCount: 0,
         } as any);
 
-        const consoleSpy = vi.spyOn(console, 'log');
+        const consoleSpy = vi.spyOn(console, 'info');
 
         await program.parseAsync(['node', 'docs', 'search', 'nonexistent']);
 
