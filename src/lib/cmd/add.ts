@@ -31,6 +31,6 @@ export function addCommand(program: Command) {
             [doc.title, doc.content, doc.category, doc.subcategory, doc.tags, doc.source_url, doc.version]
         );
 
-        console.log(`✓ Document added with id: ${result.rows[0].id}`);
+        console.info(`✓ Document added with id: ${result.rows[0].id}`);
     });
   }

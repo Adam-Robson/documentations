@@ -43,16 +43,16 @@ export function searchCommand(program: Command) {
             const result = await pool.query(sql, params);
 
             if (result.rows.length === 0) {
-                console.log('No results found.');
+                console.info('No results found.');
                 return;
             }
 
             result.rows.forEach(row => {
-                console.log(`\n[${row.id}] ${row.title}`);
-                console.log(`    category: ${row.category}${row.subcategory ? ` > ${row.subcategory}` : ''}`);
-                if (row.tags?.length) console.log(`    tags: ${row.tags.join(', ')}`);
-                if (row.version) console.log(`    version: ${row.version}`);
-                console.log(`    rank: ${parseFloat(row.rank).toFixed(4)}`);
+                console.info(`\n[${row.id}] ${row.title}`);
+                console.info(`    category: ${row.category}${row.subcategory ? ` > ${row.subcategory}` : ''}`);
+                if (row.tags?.length) console.info(`    tags: ${row.tags.join(', ')}`);
+                if (row.version) console.info(`    version: ${row.version}`);
+                console.info(`    rank: ${parseFloat(row.rank).toFixed(4)}`);
             });
         });
 }
