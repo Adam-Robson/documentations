@@ -28,6 +28,7 @@
     "typescript": "5.9.3"
   },
   "devDependencies": {
-    "@types/pg": "8.16.0"
+    "@types/pg": "8.16.0",
+    "vitest": "4.0.18"
   }
 }
