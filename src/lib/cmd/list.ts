@@ -1,5 +1,6 @@
 import { Command } from 'commander';
 import pool from '../../db/db';
+import { handleError } from '../../utils/error';
 
 export function listCommand(program: Command) {
 
@@ -45,7 +46,7 @@ export function listCommand(program: Command) {
         const result = await pool.query(sql, params);
 
         if (result.rows.length === 0) {
-            console.log('No documents found.');
+            console.info('No documents found.');
             return;
         }
 
@@ -53,22 +54,18 @@ export function listCommand(program: Command) {
         result.rows.forEach(row => {
             if (row.category !== currentCategory) {
                 currentCategory = row.category;
-                console.log(`\n── ${currentCategory.toUpperCase()} ──`);
+                console.info(`\n── ${currentCategory.toUpperCase()} ──`);
             }
             const sub = row.subcategory ? ` > ${row.subcategory}` : '';
             const ver = row.version ? ` (${row.version})` : '';
             const tags = row.tags?.length ? ` [${row.tags.join(', ')}]` : '';
-            console.log(`  [${row.id}] ${row.title}${sub}${ver}${tags}`);
+            console.info(`  [${row.id}] ${row.title}${sub}${ver}${tags}`);
         });
 
-        console.log(`\n${result.rows.length} document(s) found.`);
+        console.info(`\n${result.rows.length} document(s) found.`);
     });
-  } catch (err: unknown) {
-    if (err instanceof Error) {
-      console.error('Error setting up list command:', err.message);
-    } else {
-      console.error('Unknown error setting up list command.');
-    }
+  } catch (error) {
+    handleError(error);
   }
 }
    

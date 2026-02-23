@@ -1,5 +1,6 @@
 import { Command } from 'commander';
 import pool from '../../db/db';
+import { handleError } from '../../utils/error';
 
 export function getCommand(program: Command) {
 
@@ -27,11 +28,7 @@ export function getCommand(program: Command) {
         console.info(`    created:   ${doc.created_at.toLocaleDateString()}`);
         console.info(`\n${doc.content}`);
      });
-  } catch (err: unknown) { 
-    if (err instanceof Error) {
-      console.error(`Error retrieving document: ${err.message}`);
-    } else {
-      console.error('An unknown error occurred while retrieving the document.');
-    }
+  } catch (error) {
+    handleError(error);
   }
-};
+}

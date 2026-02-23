@@ -1,7 +1,9 @@
 import { Command } from 'commander';
 import pool from '../../db/db';
+import { handleError } from '../../utils/error';
 
 export function searchCommand(program: Command) {
+  try {
     program
         .command('search <query>')
         .description('Search documents by full text')
@@ -55,4 +57,7 @@ export function searchCommand(program: Command) {
                 console.info(`    rank: ${parseFloat(row.rank).toFixed(4)}`);
             });
         });
+  } catch (error) {
+    handleError(error);
+  }
 }

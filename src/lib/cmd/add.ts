@@ -1,6 +1,7 @@
 import { Command } from 'commander';
 import pool from '../../db/db.js';
 import { NewDocument } from '../types';
+import { handleError } from '../../utils/error';
 
 export function addCommand(program: Command) {
   program
@@ -14,6 +15,7 @@ export function addCommand(program: Command) {
     .option('-u, --url <url>', 'Source URL')
     .option('-v, --version <version>', 'Version (e.g. 3.12)')
     .action(async (opts) => {
+      try {
         const doc: NewDocument = {
             title: opts.title,
             content: opts.content,
@@ -32,5 +34,8 @@ export function addCommand(program: Command) {
         );
 
         console.info(`✓ Document added with id: ${result.rows[0].id}`);
+      } catch (error) {
+        handleError(error)
+      }
     });
   }
