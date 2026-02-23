@@ -1,6 +1,11 @@
 # Dependencies
 node_modules
 
+# build
+/dist
+/tmp
+/out
+
 # Testing and debugging
 /lib-cov
 *.seed

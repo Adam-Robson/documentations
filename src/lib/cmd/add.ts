@@ -4,12 +4,14 @@ import { NewDocument } from '../types';
 import { handleError } from '../../utils/error';
 
 export function addCommand(program: Command) {
+  try {
   program
     .command('add')
     .description('Add a document')
     .requiredOption('-t, --title <title>', 'Document title')
     .requiredOption('-c, --category <category>', 'Category (e.g. bash, python, zsh)')
-    .requiredOption('--content <content>', 'Document content')
+    .option('--content <content>', 'Document content')
+    .option('--file <path>', 'Path to file to use as content')
     .option('-s, --subcategory <subcategory>', 'Subcategory')
     .option('--tags <tags>', 'Comma separated tags')
     .option('-u, --url <url>', 'Source URL')
@@ -38,4 +40,7 @@ export function addCommand(program: Command) {
         handleError(error)
       }
     });
+  } catch (error) {
+    handleError(error)
   }
+}
